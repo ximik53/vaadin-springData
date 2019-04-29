@@ -24,12 +24,15 @@ public class VaadinUI extends UI {
     private TextField email = new TextField("Email");
     private Button save = new Button("Save", e -> saveCompany());
     private Button delete = new Button("Delete", e -> delete());
-    private Button insert = new Button("Insert", e-> insertCompany());
+    private Button insert = new Button("Insert", e -> insertCompany());
+
     @Override
-    protected void init(VaadinRequest request) {grid.setColumns("id","name","surname","email");
+    protected void init(VaadinRequest request) {
+        grid.setColumns("id", "name", "surname", "email");
         updateGrid();
         grid.addSelectionListener(e -> updateForm());
-        HorizontalLayout layout = new HorizontalLayout(new VerticalLayout(grid, new HorizontalLayout(delete, insert)), new VerticalLayout(name, surname, email, save));
+        HorizontalLayout layout = new HorizontalLayout(new VerticalLayout(grid, new HorizontalLayout(delete, insert)),
+                new VerticalLayout(name, surname, email, save));
         layout.setMargin(true);
         layout.setSpacing(true);
         setContent(layout);
@@ -40,6 +43,7 @@ public class VaadinUI extends UI {
     }
 
     Binder<Company> binder = new Binder<>(Company.class);
+
     private void updateForm() {
         if (!grid.getSelectedItems().isEmpty()) {
             company = grid.asSingleSelect().getValue();
@@ -56,12 +60,12 @@ public class VaadinUI extends UI {
         }
     }
 
-    private void delete(){
+    private void delete() {
         service.delete(company);
         updateGrid();
     }
 
-    private void insertCompany(){
+    private void insertCompany() {
         Company newCompany = new Company();
         newCompany.setName(name.getValue());
         newCompany.setSurname(surname.getValue());
