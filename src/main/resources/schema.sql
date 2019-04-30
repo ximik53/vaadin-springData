@@ -1,4 +1,4 @@
-DROP SEQUENCE IF EXISTS hibernate_sequence;
+DROP SEQUENCE IF EXISTS hibernate_sequence CASCADE;
 
 CREATE SEQUENCE hibernate_sequence;
 
